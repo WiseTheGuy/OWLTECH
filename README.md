@@ -1,2 +1,2 @@
 # OWLTECH
-confidential reactor control program for nuclear reactor based in Finland
+confidential reactor control program for OWLTECH brand nuclear reactors, based in Finland
