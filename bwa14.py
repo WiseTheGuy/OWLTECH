@@ -180,7 +180,7 @@ def startup_sequence():
         clear_screen()
         print(cyan + "REACTOR ONLINE. Standby for countdown...\n" + reset)
         draw_pressure_gauge(pressure)
-        pressure += 1.0
+        pressure += 0.5
         time.sleep(0.05)
 
 def password_protection(password):
@@ -424,7 +424,7 @@ def reactor_simulation():
                         time.sleep(1.5)
 
             # Airflow logic: fluctuates naturally
-            airflow += random.uniform(-2.0, 2.0)
+            airflow += random.uniform(-0.1, 0.1)
             airflow = max(0.0, min(100.0, airflow))  # Clamp between 0% and 100%
 
             # Temperature logic: climbs if airflow < 25%
@@ -432,7 +432,7 @@ def reactor_simulation():
             if airflow < 25.0:
                 temperature += temp_diff * 0.01 + random.uniform(1.0, 3.0)  # Temperature climbs when airflow is low
             else:
-                temperature += temp_diff * 0.01 + random.uniform(-0.5, 0.5)
+                temperature += temp_diff * 0.04 + random.uniform(-0.5, 0.5)
             temperature = max(0.0, min(1200.0, temperature))  # Clamp for realism
 
             # Gauge-related error triggers
@@ -445,11 +445,7 @@ def reactor_simulation():
                 active_errors.append(new_error)
                 beep(700, 100)
             if airflow < 15.0 and not any(e[0] == "A001" for e in active_errors):
-                new_error = ("A001", "[ERR] Airflow Critically Low", {"temperature": 3.0, "airflow": -2.0, "fix_message": "RESTARTING VENTILATION"})
-                active_errors.append(new_error)
-                beep(700, 100)
-            if airflow > 90.0 and not any(e[0] == "A002" for e in active_errors):
-                new_error = ("A002", "[WARN] Airflow Excessively High", {"temperature": -1.0, "airflow": 1.0, "fix_message": "REGULATING FANS"})
+                new_error = ("A001", "[ERR] Ventilation Ducts Blockage", {"temperature": 3.0, "airflow": -2.0, "fix_message": "RESTARTING VENTILATION"})
                 active_errors.append(new_error)
                 beep(700, 100)
 
