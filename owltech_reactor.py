@@ -424,7 +424,7 @@ def reactor_simulation():
                         time.sleep(1.5)
 
             # Airflow logic: fluctuates naturally
-            airflow += random.uniform(-0.1, 0.1)
+            airflow += random.uniform(-0.05, 0.1)
             airflow = max(0.0, min(100.0, airflow))  # Clamp between 0% and 100%
 
             # Temperature logic: climbs if airflow < 25%
