@@ -250,7 +250,7 @@ def reactor_simulation():
     difficulty = config['difficulty']
     difficulty_increases = config['difficulty_increases']
     pressure = 0.0
-    airflow = 50.0  # Initial airflow percentage
+    airflow = 90.0  # Initial airflow percentage
     lag = 0
     fix_message = "FIXING"
     fixing_error = None
@@ -424,7 +424,7 @@ def reactor_simulation():
                         time.sleep(1.5)
 
             # Airflow logic: fluctuates naturally
-            airflow += random.uniform(-0.1, 0.1)
+            airflow += random.uniform(-0.05, 0.1)
             airflow = max(0.0, min(100.0, airflow))  # Clamp between 0% and 100%
 
             # Temperature logic: climbs if airflow < 25%
